@@ -1,0 +1,8 @@
+<p>
+     <p><%= comment.content %> --by---> <%= comment.user.email %>
+     	<%= render partial: 'likes/button', locals: {likeable: comment} %>
+     </p>
+	 <% if comment.user_id == current_user.id %>
+       <%= button_to 'delete', post_comment_path(comment.post,comment), method: :delete %> 
+     <% end %>
+     </p>

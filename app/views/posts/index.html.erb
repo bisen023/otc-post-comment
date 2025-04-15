@@ -1,0 +1,37 @@
+<p style="color: green"><%= notice %></p>
+
+<% if user_signed_in? %>
+  <% content_for :title, "Posts" %>
+
+  <div>
+    <div id="posts" style="background-color: #d9b3ff; border-radius: 20px; margin:10px 20px; padding: 10px 100px; text-align: center;">
+      <h1 style="text-align: center;">Posts</h1>
+      <hr><hr>
+
+      <% @posts.each do |post| %>
+        <%= render post %>
+        <p>
+          <%= link_to "Show this post", post %>
+        </p>
+
+        <div style="background-color: #DAF7A6; border-radius: 20px;">
+          <% if post.comments.any? %>
+            <h4>comment <%= post.comment_count %></h4>
+            <%= render post.comments %>
+          <% end %>
+        </div>
+
+        <div class="comment-container" style="background-color: #ccf2ff; border-radius: 30px; margin-left: 400px; padding-left: 30px; width: 20%;">
+          <p>add comment</p>
+          <%= form_with(model: [post, post.comments.build], local: true) do |f| %>
+            <%= f.text_area :content, required: true %>
+            <%= f.submit 'Add', class: "btn btn-success" %>
+          <% end %>
+        </div>
+
+        <hr>
+        <hr>
+      <% end %>
+    </div>
+  </div>
+<% end %>

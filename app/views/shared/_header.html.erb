@@ -1,0 +1,14 @@
+
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+          <% if user_signed_in? %>
+             Welcome, <%= current_user.email %><%= link_to "New post", new_post_path %>
+             
+             <%= button_to 'logout', destroy_user_session_path, method: :delete ,
+             class: "btn btn-danger" %>
+          <% else %>
+             <%= link_to 'signin', new_user_session_path %>
+          <% end %>
+  </div>
+</nav>
+
